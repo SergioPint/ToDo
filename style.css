@@ -1,0 +1,731 @@
+* {
+    margin: 0;
+    padding: 0;
+    touch-action: manipulation;
+}
+
+:root {
+    --primary: rgb(255, 255, 255);
+    --secondary: rgb(245, 245, 245);
+    --cta: rgb(101, 149, 222);
+    --font: rgb(0, 0, 0);
+    --fontAccent: rgb(65, 65, 65);
+    --fontSubText: rgb(104, 104, 104);
+    --hover: rgb(190, 190, 190);
+    --border: rgb(233, 233, 233);
+    --menuFill: rgb(163, 163, 163);
+    --deleteIcon: url('./assets/delete.svg');
+    --toggle: url(./assets/toggle-off.svg);
+}
+
+.darkmode {
+    --primary: rgb(31, 31, 31);
+    --secondary: rgb(46, 46, 46);
+    --cta: rgb(101, 149, 222);
+    --font: rgb(255, 255, 255);
+    --fontAccent: rgb(255, 255, 255);
+    --fontSubText: rgb(104, 104, 104);
+    --hover: rgb(0, 0, 0);
+    --border: rgb(20, 20, 20);
+    --menuFill: rgb(93, 93, 93);
+    --deleteIcon: url('./assets/delete_white.svg');
+    --toggle: url(./assets/toggle-on.svg);
+}
+
+.style-toggle {
+    display: flex;
+    height: 100%;
+    display: flex;
+    align-items: end;
+}
+
+.style-toggle .icon {
+    background-image: var(--toggle);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 30px;
+    width: 50px;
+}
+
+body {
+    background-color: var(--primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    color: var(--font);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+main {
+    margin: 80px;
+    width: 100%;
+}
+
+.sidebar {
+    background-color: var(--secondary);
+    padding: 40px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--fontAccent);
+}
+
+.sidebar .logo span {
+    background-color: var(--cta);
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 10px;
+}
+
+nav li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    margin: 30px;
+    color: var(--menuFill);
+    cursor: pointer;
+}
+
+.menu li svg {
+    fill: var(--menuFill);
+    width: 25px;
+    height: 25px;
+}
+
+.menu li.active svg {
+    fill: var(--cta);
+}
+
+.menu li.active {
+    color: var(--fontAccent)
+}
+
+button.new-to-do {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--cta);
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    font-size: 1.2rem;
+    color: var(--primary);
+    border: none;
+    cursor: pointer;
+}
+
+button.new-to-do.hide {
+    display: none;
+}
+
+.content h2 {
+    margin-bottom: 5px;
+    font-size: 1.9rem;
+    color: var(--fontAccent);
+}
+
+.page-copy {
+    margin-bottom: 25px;
+    color: var(--fontSubText);
+}
+
+
+.title-done {
+    display: none;
+}
+
+.title-done.active {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--fontAccent);
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.options ul.filter-order {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 10px;
+}
+
+li.filter, li.order {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative 
+}
+.top-menu .options .filter svg {
+    height: 15px;
+    width: 15px;
+    fill: var(--fontAccent);
+}
+
+.top-menu .options .order svg {
+    height: 15px;
+    width: 15px;
+    fill: var(--fontAccent);
+}
+
+.menu-order {
+    position: absolute;
+    top: 30px;
+    right: 0;
+} 
+
+.menu-filter {
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+
+.active-filter {
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: rgb(161, 40, 40);
+    position: absolute;
+    right: -1px;
+    top: 5px;
+    visibility: hidden;
+}
+
+.active-filter.active {
+    visibility: visible;
+}
+
+
+.priority-filter {
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+    border-top: 1px solid var(--border);
+}
+
+.priority-filter div {
+    display: flex;
+    align-items: center;
+}
+
+.priority-filter label {
+    padding: 5px 10px!important;
+}
+
+.priority-filter input[type="checkbox"] {
+    display: none;
+ }
+
+.projects-filter {
+    padding: 10px;
+    border-top: 1px solid var(--border);
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.projects-filter div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 2px;
+}
+
+.priority-filter + h4 {
+    border-top: 1px solid var(--border);
+}
+
+.menu-order, .menu-filter {
+    flex-direction: column;
+    background-color: var(--primary);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--fontAccent);
+    box-shadow: 0px 0 10px 2px rgb(0 0 0 / 9%);
+    transform: scale(0);
+    transition: 100ms ease-in-out;
+}
+
+.menu-order.active, .menu-filter.active {
+    transform: scale(1);
+}
+
+.menu-order h4, .menu-filter h4  {
+    padding: 7px;
+    font-size: 0.9rem;
+}
+
+.menu-order li {
+    list-style: none;
+    white-space: nowrap;
+    border-top: 1px solid var(--border);
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+.menu-order li:hover {
+    background-color: var(--secondary);
+}
+
+.item {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    background-color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    height: 60px;
+    color: var(--fontAccent);
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.no-to-do {
+    background-color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--fontAccent);
+    margin-bottom: 15px;
+    padding: 15px;
+}
+.no-to-do.active { display: none;}
+
+.item .due-date, .item .title, .item .delete {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    height: 30px;
+} 
+
+.item .title {
+    cursor: pointer;
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item .due-date {
+    cursor: pointer;
+}
+
+.item .checkbox {
+    background-color: var(--primary);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 15px solid var(--secondary);
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .checkbox:hover {
+        background-image: url("./assets/check.svg");
+        background-color: var(--hover);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+}
+
+.checkbox.done {
+    background-image: url("./assets/check.svg");
+    background-color: rgb(59, 164, 42);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.done + .title, .done + .title + .due-date {
+    text-decoration: line-through;
+    color: var(--fontSubText);
+}
+
+.item .delete {
+    background-image: var(--deleteIcon);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 25%;
+    width: 30px;
+    height: 60px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+
+/* projects */
+
+.to-do-container.hide { display: none; }
+
+.container-projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--secondary);
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    height: 40px;
+    color: var(--font);
+    align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.project-item .project-title {
+    padding: 0 15px;
+}
+
+.add {
+    margin-top: 15px;
+  
+}
+
+.add input {
+    background-color: var(--secondary);
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    width: 100%;
+    height: 40px;
+    color: var(--font);
+    box-sizing: border-box;
+}
+
+button.add-project {
+    background-color: var(--cta);
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.2rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+.project-item .project-delete {
+    background-image: var(--deleteIcon);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 20%;
+    width: 30px;
+    height: 40px;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+/* modals */
+
+.modal, .details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 10;
+    background-color: var(--primary);
+    width: 600px;
+    max-width: 80%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.modal.active, .details.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header, .detail-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--fontAccent);
+    margin-bottom: 15px;
+}
+
+.modal-header .close, .detail-header .close  {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(99, 99, 99);
+    padding: 0;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    pointer-events: none;
+}
+
+#overlay.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button.submit {
+    background-color: var(--cta);
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.2rem;
+    width: 100%;
+} 
+
+input, textarea, select {
+    background-color: var(--secondary);
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    padding: 10px;
+    font-size: 16px;
+    color: var(--font);
+}
+
+input[type="date"]::before {
+    content: attr(placeholder);
+    position: absolute;
+    color: var(--fontSubText);
+    -webkit-text-fill-color: var(--fontSubText);
+}
+  
+  input[type="date"] {
+    color: var(--secondary);
+}
+  
+  input[type="date"]:focus,
+  input[type="date"]:valid {
+    color: var(--font);
+    -webkit-text-fill-color: var(--font);
+}
+  
+  input[type="date"]:focus::before,
+  input[type="date"]:valid::before {
+    content: "";
+}
+
+select:invalid {
+    color: var(--fontSubText);
+    -webkit-text-fill-color: var(--fontSubText);
+    font-size: 15px;
+}
+
+.priority {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+    margin: 0;
+    color: var(--fontSubText);
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+textarea {
+    height: 100px;
+}
+
+.fields label {
+    color: var(--fontSubText);
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+.date-projects {
+    display: flex;
+}
+
+form p.required {
+    font-size: 0.8rem;
+    color: rgb(94, 94, 94);
+    font-style: italic;
+    margin-top: 10px;
+}
+
+input[type="radio"] {
+    display: none;
+ }
+
+.priority label, .priority-filter label {
+    background-color: var(--secondary);
+    padding: 10px 15px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+}
+
+.priority input[value="low"]:checked+label, .priority-filter input[name="low-filter"]:checked+label {
+    background-color: rgb(59, 164, 42);
+    border-color: rgb(47, 133, 34);
+    color: white;
+
+}
+
+.priority input[value="medium"]:checked+label, .priority-filter input[name="medium-filter"]:checked+label  {
+    background-color: rgb(236, 154, 32);
+    border-color: rgb(189, 124, 28);
+    color: white;
+}
+
+.priority input[value="high"]:checked+label, .priority-filter input[name="high-filter"]:checked+label {
+    background-color: rgb(212, 54, 42);
+    border-color:  rgb(173, 44, 35);
+    color: white;
+}  
+
+/* mobile styling */
+@media all and (max-width: 767px) {
+
+    input[type="date"] {
+        -webkit-appearance: none;
+        -webkit-text-fill-color: var(--font);
+        min-height: 1.2em;
+        display: block;
+    }
+
+    select {
+        -webkit-appearance: none;
+        -webkit-text-fill-color: var(--font);
+        display: block;
+        background-image: url(./assets/datepicker.svg);
+        background-size: 12px;
+        background-repeat: no-repeat;
+        background-position: 95% 50%;
+    } 
+
+    input::-webkit-date-and-time-value {
+        text-align: left;
+      }
+
+    .container {
+        flex-direction: column;
+        padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+    
+    .sidebar {
+        padding: 15px;
+        border-bottom: 1px solid var(--border);
+        border-right: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .sidebar .logo {
+        margin: 0;
+    }
+
+    .logo h1 {
+        font-size: 1.7rem;
+    }
+
+    main {
+        margin: 30px;
+        width: initial;
+    }
+
+    nav ul {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100vw;
+        display: flex;
+        gap: 0;
+        background-color: var(--secondary);
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: env(safe-area-inset-bottom);
+        border-top: 1px solid var(--border);
+    }
+
+    nav li {
+        margin: 5px;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 0.8rem;
+        padding: 5px;
+        width: 70px;
+        height: 100%;
+
+    }
+    button.new-to-do {
+        bottom: calc(95px + env(safe-area-inset-bottom));
+        right: 15px;
+        height: 50px;
+        width: 50px;
+    }
+    .modal, .details {
+        transform: translate(-50%, 150%) scale(1);
+        transition: 0.4s ease-in-out;
+        background-color: var(--primary);
+        width: 100%;
+        height: calc(100% - 40px);
+        max-width: 100%;
+        box-sizing:border-box
+    }
+    .modal.active, .details.active {
+        transform: translate(-50%, -40%) scale(1);
+    }
+    .item .delete {
+        background-color: rgb(212, 54, 42);
+        border: 1px solid  rgb(173, 44, 35);
+        background-image: url(./assets/delete_white.svg);
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        width: 0;
+        display: none;
+        transition: 500ms ease-in;
+    } 
+    .item .delete.active {
+        display: inline;
+        width: 70px;
+    }
+    .item .due-date {
+        padding-right: 15px;
+    }
+}
